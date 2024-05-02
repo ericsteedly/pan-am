@@ -1,5 +1,5 @@
 import { AppBar, Box, Container, Link, Toolbar, Typography } from "@mui/material"
-import MainMenu from "./MainMenu"
+import MainMenu from "./main-menu"
 
 
 export default function NavBar() {

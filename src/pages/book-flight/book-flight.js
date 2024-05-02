@@ -1,10 +1,10 @@
 import { Grid, Typography } from "@mui/material"
 import Box from '@mui/material/Box';
 import Paper from "@mui/material/Paper";
-import Layout from "@/components/Layout";
-import NavBar from "@/components/navbar/NavBar";
+import Layout from "@/components/layout";
+import NavBar from "@/components/navbar/navbar";
 import classes from "./book-flight.module.css"
-import AirportSelect from "@/components/AirportSelect";
+import AirportSelect from "@/components/airport-select";
 
 export default function BookFlight() {
 

@@ -11,9 +11,8 @@ export default function AirportSelect({ label }) {
     useEffect(()=>{
         getAirports().then( res => {
             setAirports(res)
-        }
-        )
-    },[airports])
+        })
+    },[])
 
     const Label = styled('label')({
         display: 'block',
@@ -39,7 +38,7 @@ export default function AirportSelect({ label }) {
                     label="Where Would You Like To Fly?"
                     inputProps={{
                         ...params.inputProps,
-                        autocomplete: 'new-password'
+                        autoComplete: 'new-password'
                     }}
                 />
             )}
