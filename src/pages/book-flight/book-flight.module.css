@@ -1,0 +1,40 @@
+.mainPaper {
+    display: flex;
+    margin: 20px 10px; 
+    flex-direction: column;
+}
+
+.titleContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.title {
+    font-weight:500;
+}
+
+.form {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    border: solid 1px black;
+}
+
+.column1 {
+    display: flex;
+    flex-direction: column;
+    border: dotted 1px red;
+}
+
+.column2 {
+    display: flex;
+    flex-direction: column;
+    border: dotted 1px green;
+}
+
+.column3 {
+    display: flex;
+    flex-direction: column;
+    border: dotted 1px blue;
+}

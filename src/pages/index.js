@@ -1,6 +1,6 @@
 import Layout from '@/components/layout'
 import NavBar from '@/components/navbar/NavBar'
-import BookFlight from './book-flight'
+import BookFlight from './book-flight/book-flight'
 
 
 export default function Index() {
