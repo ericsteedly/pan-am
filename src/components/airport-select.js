@@ -2,8 +2,6 @@ import { Autocomplete } from "@mui/material"
 import TextField from "@mui/material/TextField"
 import Box from "@mui/material/Box"
 import { styled } from '@mui/system';
-import { useEffect, useState } from "react";
-import { getAirports } from "@/data/flights";
 
 export default function AirportSelect({ label, airports, refEl }) {
     const Label = styled('label')({

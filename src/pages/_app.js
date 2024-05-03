@@ -1,4 +1,7 @@
 import CssBaseline from '@mui/material/CssBaseline';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+
 
 export default function PanAm({ Component, pageProps}) {
     // Use the layout defined at the page level, if available
@@ -6,9 +9,11 @@ export default function PanAm({ Component, pageProps}) {
 
     return getLayout(
       <>
-        <CssBaseline>
-          <Component {...pageProps} />
-        </CssBaseline>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <CssBaseline>
+            <Component {...pageProps} />
+          </CssBaseline>
+          </LocalizationProvider>
       </>
   )
 }

@@ -7,12 +7,30 @@ import classes from "./book-flight.module.css"
 import AirportSelect from "@/components/airport-select";
 import { useState, useEffect, useRef } from "react";
 import { getAirports } from "@/data/flights";
+import DateSelector from "@/components/date-select";
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+
 
 export default function BookFlight() {
+  const [disablePicker, setDisablePicker] = useState(false)
   const [airports, setAirports] = useState([])
   const refEls = {
     depart: useRef(),
-    arrive: useRef()
+    arrive: useRef(),
+    departDate: useRef(null),
+    returnDate: useRef(null)
+  }
+
+  const findFlights = () => {
+    event.preventDefault()
+    console.log("worked")
+  }
+
+  const disabler = () => {
+    setDisablePicker(!disablePicker)
   }
 
   useEffect(()=>{
@@ -39,31 +57,56 @@ export default function BookFlight() {
       >
           <Grid item md={10.5}>
             <Paper elevation={3} className={`${classes.mainPaper}`}>
+            <FormControl onSubmit={findFlights}>
               <Box className={`${classes.titleContainer}`}>
                 <Typography variant="h3" className={`${classes.title}`}>
                   Book a Flight
                 </Typography>
               </Box>
-              <Box component="form" className={`${classes.form}`} onSubmit={handleSubmit}>
-                <Box className={`${classes.column1}`}>
-                  <AirportSelect 
-                    label={"Depart"} 
-                    airports={airports}
-                    refEl={refEls.depart}
-                  />
-                  <AirportSelect 
-                    label={"Arrive"} 
-                    airports={airports}
-                    refEl={refEls.arrive}
-                  />
+              <Box className={`${classes.formMain}`}>
+                <Box className={`${classes.formUpper}`}>
+                  <RadioGroup 
+                    row 
+                    name="flight-radio" 
+                    defaultValue="roundtrip"
+                    onChange={disabler} 
+                  >
+                  <FormControlLabel value={'oneway'} control={<Radio />} label="Oneway" />
+                  <FormControlLabel value={'roundtrip'} control={<Radio />} label="Roundtrip" />
+                  </RadioGroup>
                 </Box>
-                <Box className={`${classes.column2}`}>
-
-                </Box>
-                <Box className={`${classes.column3}`}>
-                  <Button onClick={()=>console.log(refEls.depart.current)}>Button</Button>
+                <Box component="form" className={`${classes.formLower}`} onSubmit={handleSubmit}>
+                  <Box className={`${classes.column1}`}>
+                    <AirportSelect 
+                      label={"Depart"} 
+                      airports={airports}
+                      refEl={refEls.depart}
+                    />
+                    <AirportSelect 
+                      label={"Arrive"} 
+                      airports={airports}
+                      refEl={refEls.arrive}
+                    />
+                  </Box>
+                  <Box className={`${classes.column2}`}>
+                    <DateSelector
+                      disabled={disablePicker}
+                      departRefEl={refEls.departDate}
+                      returnRefEl={refEls.returnDate} 
+                    />
+                  </Box>
+                  <Box className={`${classes.column3}`}>
+                    <Button 
+                      variant="contained"
+                      type="submit"
+                      // onClick={()=>console.log(refEls.departDate.current)}
+                    >
+                    Button
+                    </Button>
+                  </Box>
                 </Box>
               </Box>
+            </FormControl>
             </Paper>
           </Grid>
       </Grid>

@@ -2,6 +2,7 @@
     display: flex;
     margin: 20px 10px; 
     flex-direction: column;
+    padding: 10px 0px 20px 0px;
 }
 
 .titleContainer {
@@ -14,27 +15,36 @@
     font-weight:500;
 }
 
-.form {
+.formMain {
+    display: flex;
+    flex-direction: column;
+}
+
+.formUpper {
+    display: flex;
+    flex-direction: row;
+    padding: 10px 20px;
+}
+
+.formLower {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    border: solid 1px black;
 }
 
 .column1 {
     display: flex;
     flex-direction: column;
-    border: dotted 1px red;
 }
 
 .column2 {
     display: flex;
     flex-direction: column;
-    border: dotted 1px green;
 }
 
 .column3 {
     display: flex;
     flex-direction: column;
-    border: dotted 1px blue;
+    justify-content: flex-end;
 }
+
