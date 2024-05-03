@@ -1,12 +1,25 @@
-import { Grid, Typography } from "@mui/material"
+import { Button, Grid, Typography } from "@mui/material"
 import Box from '@mui/material/Box';
 import Paper from "@mui/material/Paper";
 import Layout from "@/components/layout";
 import NavBar from "@/components/navbar/navbar";
 import classes from "./book-flight.module.css"
 import AirportSelect from "@/components/airport-select";
+import { useState, useEffect, useRef } from "react";
+import { getAirports } from "@/data/flights";
 
 export default function BookFlight() {
+  const [airports, setAirports] = useState([])
+  const refEls = {
+    depart: useRef(),
+    arrive: useRef()
+  }
+
+  useEffect(()=>{
+    getAirports().then( res => {
+        setAirports(res)
+    })
+},[])
 
   const handleSubmit = () => {
     return console.log("submitted")
@@ -33,16 +46,22 @@ export default function BookFlight() {
               </Box>
               <Box component="form" className={`${classes.form}`} onSubmit={handleSubmit}>
                 <Box className={`${classes.column1}`}>
-                  <AirportSelect label={"Depart"}/>
-                  <AirportSelect label={"Arrive"}/>
+                  <AirportSelect 
+                    label={"Depart"} 
+                    airports={airports}
+                    refEl={refEls.depart}
+                  />
+                  <AirportSelect 
+                    label={"Arrive"} 
+                    airports={airports}
+                    refEl={refEls.arrive}
+                  />
                 </Box>
                 <Box className={`${classes.column2}`}>
-                <AirportSelect />
-                <AirportSelect />
+
                 </Box>
                 <Box className={`${classes.column3}`}>
-                <AirportSelect />
-                <AirportSelect />
+                  <Button onClick={()=>console.log(refEls.depart.current)}>Button</Button>
                 </Box>
               </Box>
             </Paper>

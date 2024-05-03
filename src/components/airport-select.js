@@ -5,17 +5,12 @@ import { styled } from '@mui/system';
 import { useEffect, useState } from "react";
 import { getAirports } from "@/data/flights";
 
-export default function AirportSelect({ label }) {
-    const [airports, setAirports] = useState([])
-
-    useEffect(()=>{
-        getAirports().then( res => {
-            setAirports(res)
-        })
-    },[])
-
+export default function AirportSelect({ label, airports, refEl }) {
     const Label = styled('label')({
         display: 'block',
+        fontFamily: 'inherit',
+        fontWeight: 600,
+        fontSize: 25
       });
 
     return (
@@ -23,15 +18,24 @@ export default function AirportSelect({ label }) {
         <Label>{label}</Label>
         <Autocomplete 
             id="airport-select"
-            sx={{ width: 300 }}
-            options={airports}
+            sx={{ width: 350 }}
             autoHighlight
-            getOptionLabel={(option) => option.airport_code}
-            renderOption={(props, option) => (
-                <Box component= "li" {...props}>
-                    {option.airport_code} - {option.name}, {option.city}
-                </Box>
-            )}
+            onChange={(event, newValue) => {
+                if (refEl) {
+                refEl.current = newValue
+                console.log(refEl.current)
+                }
+            }}
+            options={airports}
+            getOptionLabel={(option) => option?.airport_code || ''}
+            renderOption={(props, option) => {
+                const { key, ...otherProps } = props
+                return (
+                    <Box component= "li" key={key} {...otherProps}>
+                        {option.airport_code} - {option.name}, {option.city}
+                    </Box>
+                )
+            }}
             renderInput={(params) => (
                 <TextField 
                     {...params}
