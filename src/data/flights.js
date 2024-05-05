@@ -10,3 +10,12 @@ export const getAirports = () => {
     })
 }
 
+export const getFlights = (query) => {
+    return fetchWithResponse(`flights?${query}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Token ${localStorage.getItem("token")}`
+        }
+    })
+}

@@ -6,15 +6,19 @@ import NavBar from "@/components/navbar/navbar";
 import classes from "./book-flight.module.css"
 import AirportSelect from "@/components/airport-select";
 import { useState, useEffect, useRef } from "react";
-import { getAirports } from "@/data/flights";
+import { getAirports, getFlights } from "@/data/flights";
 import DateSelector from "@/components/date-select";
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
+import dayjs from "dayjs";
+import { useRouter } from "next/router";
+import { useAppContext } from "@/context/state";
 
 
 export default function BookFlight() {
+  const { setDepartQuery, setReturnQuery } = useAppContext()
   const [disablePicker, setDisablePicker] = useState(false)
   const [airports, setAirports] = useState([])
   const refEls = {
@@ -23,10 +27,32 @@ export default function BookFlight() {
     departDate: useRef(null),
     returnDate: useRef(null)
   }
+  const router = useRouter()
 
-  const findFlights = () => {
+  const findFlights = async (event) => {
     event.preventDefault()
-    console.log("worked")
+    const departDateObj = dayjs(refEls.departDate.current)
+    const departFormat = departDateObj.format('YYYY-MM-DD')
+    const returnDateObj = dayjs(refEls.returnDate.current)
+    const returnFormat = returnDateObj.format('YYYY-MM-DD')
+    const d = refEls.depart.current.id
+    const a = refEls.arrive.current.id
+    const departQuery = `departureAirport=${d}&arrivalAirport=${a}&departureDay=${departFormat}`
+    let returnQuery = null
+    refEls.returnDate.current !== null 
+      ? 
+      returnQuery = `departureAirport=${a}&arrivalAirport=${d}&departureDay=${returnFormat}`
+      :
+      null
+
+    try {
+      setDepartQuery(departQuery)
+      setReturnQuery(returnQuery)
+      router.push("depart-flight")
+
+    } catch (error) {
+      console.error('Error fetching flights', error)
+    }
   }
 
   const disabler = () => {
@@ -99,7 +125,15 @@ export default function BookFlight() {
                     <Button 
                       variant="contained"
                       type="submit"
-                      // onClick={()=>console.log(refEls.departDate.current)}
+                      sx={{
+                        boxShadow: 3, 
+                        backgroundColor: '#F3B12C',
+                        color: 'white',
+                        ":hover": {
+                            backgroundColor: '#A1A1A1',
+                            color: 'white'
+                        }
+                    }}
                     >
                     Button
                     </Button>
@@ -117,9 +151,8 @@ export default function BookFlight() {
 BookFlight.getLayout = function getLayout(page) {
   return (
       <Layout>
-        <NavBar>
+        <NavBar/>
           {page}
-        </NavBar>
       </Layout>
   )
 }

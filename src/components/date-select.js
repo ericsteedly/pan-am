@@ -18,33 +18,34 @@ export default function DateSelector({ departRefEl, returnRefEl, disabled }) {
       <Label>Depart Date</Label>
       <DatePicker
         disablePast
-        closeOnSelect={false}
         onChange={(date) => {
           setArrive(date)
           if (departRefEl) {
-            departRefEl.current = date
+            const dateString = date?.toISOString()
+            departRefEl.current = dateString
             }
         }}
         maxDate={depart}
         slotProps={{
           actionBar: {
-            actions: ['accept', 'clear']
+            actions: ['clear']
           }
         }}
       />
-            <Label>Return Date</Label>
+      <Label>Return Date</Label>
       <DatePicker
         disabled={disabled}
         onChange={(date) => {
           setDepart(date)
           if (returnRefEl) {
-            returnRefEl.current = date
+            const dateString = date?.toISOString()
+            returnRefEl.current = dateString
             }
         }}
         minDate={arrive}
         slotProps={{
           actionBar: {
-            actions: ['accept', 'clear']
+            actions: ['clear']
           }
         }}
       />

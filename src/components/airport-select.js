@@ -1,7 +1,9 @@
 import { Autocomplete } from "@mui/material"
 import TextField from "@mui/material/TextField"
 import Box from "@mui/material/Box"
-import { styled } from '@mui/system';
+import { styled } from '@mui/system'
+import FlightTakeoffSharpIcon from '@mui/icons-material/FlightTakeoffSharp';
+import FlightLandSharpIcon from '@mui/icons-material/FlightLandSharp';
 
 export default function AirportSelect({ label, airports, refEl }) {
     const Label = styled('label')({
@@ -12,8 +14,19 @@ export default function AirportSelect({ label, airports, refEl }) {
       });
 
     return (
-    <>
+    <>  
+        <Box sx={{
+                display: 'flex',
+                alignItems: 'center',
+            }}
+        >
         <Label>{label}</Label>
+        {label === "Depart" ?
+        <FlightTakeoffSharpIcon sx={{ color: '#61E026', ml: 2}}/>
+        :
+        <FlightLandSharpIcon sx={{color: '#DC0B0B', ml: 2}}/>
+        }
+        </Box>
         <Autocomplete 
             id="airport-select"
             sx={{ width: 350 }}
@@ -21,7 +34,6 @@ export default function AirportSelect({ label, airports, refEl }) {
             onChange={(event, newValue) => {
                 if (refEl) {
                 refEl.current = newValue
-                console.log(refEl.current)
                 }
             }}
             options={airports}
