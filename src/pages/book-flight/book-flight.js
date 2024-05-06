@@ -65,9 +65,6 @@ export default function BookFlight() {
     })
 },[])
 
-  const handleSubmit = () => {
-    return console.log("submitted")
-  }
 
   return (
     <>
@@ -101,7 +98,7 @@ export default function BookFlight() {
                   <FormControlLabel value={'roundtrip'} control={<Radio />} label="Roundtrip" />
                   </RadioGroup>
                 </Box>
-                <Box component="form" className={`${classes.formLower}`} onSubmit={handleSubmit}>
+                <Box component="form" className={`${classes.formLower}`}>
                   <Box className={`${classes.column1}`}>
                     <AirportSelect 
                       label={"Depart"} 
@@ -135,7 +132,7 @@ export default function BookFlight() {
                         }
                     }}
                     >
-                    Button
+                    Search Flight
                     </Button>
                   </Box>
                 </Box>

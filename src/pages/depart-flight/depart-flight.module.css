@@ -1,9 +1,43 @@
-
-
-.border {
-    border: 1px solid red;
+.headerCard {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 20px;
+    background-color: rgb(203, 199, 199);
+    border-radius: 0;
 }
 
-.cardMain {
-    background-color: aquamarine;
+.title {
+    font-weight: 600;
+    margin-right: 120px;
+}
+
+.line {
+    border: solid 1px green;
+    margin-top: 8px;
+}
+
+.labelBar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding-left: 15px;
+}
+
+.departLabelBox {
+    display: flex;
+    width: 220px;
+}
+
+.labelBox {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    width: 220px;
+}
+
+.buttonBox {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 60px;
 }
