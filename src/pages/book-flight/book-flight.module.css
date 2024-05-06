@@ -1,0 +1,49 @@
+.mainPaper {
+    display: flex;
+    margin: 20px 10px; 
+    flex-direction: column;
+    padding: 10px 0px 20px 0px;
+}
+
+.titleContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.title {
+    font-weight:500;
+}
+
+.formMain {
+    display: flex;
+    flex-direction: column;
+}
+
+.formUpper {
+    display: flex;
+    flex-direction: row;
+    padding: 10px 20px;
+}
+
+.formLower {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.column1 {
+    display: flex;
+    flex-direction: column;
+}
+
+.column2 {
+    display: flex;
+    flex-direction: column;
+}
+
+.column3 {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}

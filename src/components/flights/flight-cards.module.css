@@ -1,0 +1,47 @@
+.title {
+    font-weight: 600;
+}
+
+.flightCard {
+    display: flex;
+    flex-direction: row;
+    background-color: rgb(203, 199, 199);
+    padding: 15px 0px 15px 15px;
+    border-radius: 0;
+}
+
+.timeBox {
+    display: flex;
+    flex-direction: column;
+    width: 220px;
+}
+
+.stopBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 220px;
+}
+
+.durationBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 220px;
+}
+
+.toggleBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 220px;
+}
+
+.toggle {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(128, 173, 128);
+    padding: 2px 20px;
+
+}
