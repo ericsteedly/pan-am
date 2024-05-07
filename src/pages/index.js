@@ -1,5 +1,5 @@
 import Layout from '@/components/layout'
-import NavBar from '@/components/navbar/navbar'
+import NavBar from '@/components/navbar/navBar'
 import BookFlight from './book-flight/book-flight'
 
 
