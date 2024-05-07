@@ -29,6 +29,9 @@ export default function DateSelector({ departRefEl, returnRefEl, disabled }) {
         slotProps={{
           actionBar: {
             actions: ['clear']
+          },
+          textField: {
+            required: true
           }
         }}
       />
@@ -46,6 +49,9 @@ export default function DateSelector({ departRefEl, returnRefEl, disabled }) {
         slotProps={{
           actionBar: {
             actions: ['clear']
+          },
+          textField: {
+            required: true
           }
         }}
       />

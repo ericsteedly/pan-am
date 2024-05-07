@@ -7,14 +7,34 @@ import convertDuration from "../utility/convert-duration"
 import classes from "./flight-cards.module.css"
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import ToggleButton from '@mui/material/ToggleButton';
-import { useState } from "react"
+import React from "react"
 
-export default function FlightCards({ flightList }) {
-    const [price, setPrice] = useState('economy')
 
-    const handlePriceChange = (event, newPrice) => {
-        setPrice(newPrice)
+export default function FlightCards({ flightList, flightChoice, setFlightChoice  }) {
+    const handleFlightChoice = (event, value) => {
+        setFlightChoice(value)
     }
+
+
+    const CustomToggleButtonGroup = ({ value, onChange, children, ...props }) => {
+        const handleChange = (event, newValue) => {
+          if (newValue !== null) {
+            onChange(event, newValue);
+          }
+        };
+      
+        return (
+          <ToggleButtonGroup value={null} exclusive onChange={handleChange} {...props}>
+            {React.Children.map(children, (child) => {
+              if (React.isValidElement(child)) {
+                const isSelected = JSON.stringify(value) === JSON.stringify(child.props.value);
+                return React.cloneElement(child, { selected: isSelected });
+              }
+              return child;
+            })}
+          </ToggleButtonGroup>
+        );
+      };
 
 
   return (
@@ -48,14 +68,14 @@ export default function FlightCards({ flightList }) {
                                     </Typography>
                                 </Box>
                                 <Box className={`${classes.toggleBox}`}> 
-                                    <ToggleButtonGroup
+                                    <CustomToggleButtonGroup
                                         color='info'
-                                        value={price}
+                                        value={flightChoice}
                                         exclusive
-                                        onChange={handlePriceChange}
+                                        onChange={handleFlightChoice}
                                         aria-label="ticket buttons"
                                     >
-                                        <ToggleButton value={flight.flight1.id} aria-label="ticket" className={`${classes.toggle}`}>
+                                        <ToggleButton value={[flight.flight1.id, flight.flight2.id]} aria-label="ticket" className={`${classes.toggle}`}>
                                             <Typography variant="h6" color='black'>
                                             ${flight.total_price}
                                             </Typography>
@@ -63,7 +83,7 @@ export default function FlightCards({ flightList }) {
                                                 <i>{flight.flight1.seats} left</i>
                                             </Typography>
                                         </ToggleButton>
-                                    </ToggleButtonGroup>
+                                    </CustomToggleButtonGroup>
                                 </Box>
                             </Card>
                         </Grid>
@@ -93,14 +113,14 @@ export default function FlightCards({ flightList }) {
                                     </Typography>
                                 </Box>
                                 <Box className={`${classes.toggleBox}`}> 
-                                    <ToggleButtonGroup
+                                    <CustomToggleButtonGroup
                                     color="info"
-                                        value={price}
+                                        value={flightChoice}
                                         exclusive
-                                        onChange={handlePriceChange}
+                                        onChange={handleFlightChoice}
                                         aria-label="ticket buttons"
                                     >
-                                        <ToggleButton value={flight.id} aria-label="ticket" className={`${classes.toggle}`}>
+                                        <ToggleButton value={[flight.id]} aria-label="ticket" className={`${classes.toggle}`}>
                                             <Typography variant="h6" color='black'>
                                             ${flight.price}
                                             </Typography>
@@ -108,7 +128,7 @@ export default function FlightCards({ flightList }) {
                                                 <i>{flight.seats} left</i>
                                             </Typography>
                                         </ToggleButton>
-                                    </ToggleButtonGroup>
+                                    </CustomToggleButtonGroup>
                                 </Box>
                             </Card>
                         </Grid>

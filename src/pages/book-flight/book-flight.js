@@ -2,7 +2,7 @@ import { Button, Grid, Typography } from "@mui/material"
 import Box from '@mui/material/Box';
 import Paper from "@mui/material/Paper";
 import Layout from "@/components/layout";
-import NavBar from "@/components/navbar/navbar";
+import NavBar from "@/components/navbar/navBar";
 import classes from "./book-flight.module.css"
 import AirportSelect from "@/components/airport-select";
 import { useState, useEffect, useRef } from "react";
@@ -48,7 +48,7 @@ export default function BookFlight() {
     try {
       setDepartQuery(departQuery)
       setReturnQuery(returnQuery)
-      router.push("depart-flight")
+      router.push("select-flight")
 
     } catch (error) {
       console.error('Error fetching flights', error)

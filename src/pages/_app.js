@@ -1,3 +1,4 @@
+import AuthWrapper from '@/components/auth';
 import CssBaseline from '@mui/material/CssBaseline';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
@@ -9,11 +10,13 @@ export default function PanAm({ Component, pageProps}) {
 
     return getLayout(
       <>
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <CssBaseline>
-            <Component {...pageProps} />
-          </CssBaseline>
-          </LocalizationProvider>
+        <AuthWrapper>
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <CssBaseline>
+              <Component {...pageProps} />
+            </CssBaseline>
+            </LocalizationProvider>
+        </AuthWrapper> 
       </>
   )
 }
