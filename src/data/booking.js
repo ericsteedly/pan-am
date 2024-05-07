@@ -11,15 +11,27 @@ export const createBooking = (flights) => {
     })
 }
 
-// export const retrieveBooking = (bookingId) => {
-//     fetchWithResponse(`bookings/${bookingId}`, {
-//         method: "GET",
-//         headers: {
-//             "Content-Type": "application/json",
-//             Authorization: `Token ${localStorage.getItem("token")}`
-//         }
-//     })
-// } 
+export const createRoundTrip = (roundTripObj) => {
+    return fetchWithResponse("bookings/roundtrip", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Token ${localStorage.getItem("token")}`
+        },
+        body: JSON.stringify(roundTripObj)
+    })
+}
+
+export const deleteBooking = (bookingId) => {
+    return fetchWithoutResponse("bookings", {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Token ${localStorage.getItem("token")}`
+        },
+        body: JSON.stringify (bookingId)
+    })
+}
 
 export const retrieveBooking = async (bookingId) => {
     return await fetch(`http://localhost:8000/bookings/${bookingId}`,
@@ -30,7 +42,7 @@ export const retrieveBooking = async (bookingId) => {
                 Authorization: `Token ${localStorage.getItem("token")}`
             }
         }
-    )
+    ).then((res)=>res.json())
 }
 
 export const retrieveRoundTrip = async (roundTripId) => {
@@ -42,16 +54,16 @@ export const retrieveRoundTrip = async (roundTripId) => {
                 Authorization: `Token ${localStorage.getItem("token")}`
             }
         }
-    )
+    ).then((res)=>res.json())
 }
 
-export const createRoundTrip = (roundTripObj) => {
-    return fetchWithResponse("bookings/roundtrip", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            Authorization: `Token ${localStorage.getItem("token")}`
-        },
-        body: JSON.stringify(roundTripObj)
-    })
-}
+
+// export const retrieveBooking = (bookingId) => {
+//     fetchWithResponse(`bookings/${bookingId}`, {
+//         method: "GET",
+//         headers: {
+//             "Content-Type": "application/json",
+//             Authorization: `Token ${localStorage.getItem("token")}`
+//         }
+//     })
+// } 

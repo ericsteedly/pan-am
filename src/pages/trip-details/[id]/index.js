@@ -3,19 +3,51 @@ import NavBar from "@/components/navbar/navBar"
 import { Grid, Button, Typography, Paper, Box, Card } from "@mui/material"
 import classes from "./trip-details.module.css"
 import { useEffect, useState } from "react"
-import { retrieveBooking } from "@/data/booking"
+import { deleteBooking, retrieveBooking } from "@/data/booking"
 import { useRouter } from "next/router"
+import formatDate from "@/components/utility/date-formatter"
+import convertTime from "@/components/utility/convert-time"
 
 export default function TripDetails() {
   const router = useRouter()
   const { id } = router.query
   const [booking, setBooking] = useState({})
+  const [tickets, setTickets] = useState([])
+  const [depart, setDepart] = useState({})
+  const [arrive, setArrive] = useState({})
+  const taxes = .10
+  const fees = 12.00
+
+  const handleCancel = () => {
+    const bookingObj = {
+      booking_id: booking.id
+    }
+    deleteBooking(bookingObj)
+    router.push("/")
+  }
+
+  const handleContinue = () => {
+      router.push(`ticket-form/${booking.id}`)
+  }
 
   useEffect(()=>{
     retrieveBooking(id).then((res)=>{
       setBooking(res)
+      setTickets(res.tickets)
     })
-  },[])
+  },[id])
+
+  useEffect(()=>{
+    if (tickets.length) {
+      setDepart(tickets[0].flight)
+      if (tickets.length > 0) {
+        const lastFlight = tickets.length-1
+        setArrive(tickets[lastFlight].flight)
+      } else {
+        setArrive(tickets[0].flight)
+      }
+    }
+  },[tickets])
   
   return (
     <>
@@ -39,7 +71,24 @@ export default function TripDetails() {
                       </Typography>
                     </Box>
                     <Box className={`${classes.flightBox}`}>
-                      srthrth
+                      <Typography>
+                        {tickets.length ? formatDate(tickets[0].flight.departureDay) : ""}
+                      </Typography>
+                      <Box className={`${classes.flightDetail}`}>
+                        <Typography variant="h5" fontWeight="700">
+                          {depart.departureAirport?.airport_code} to {arrive.arrivalAirport?.airport_code}
+                        </Typography>
+                        <Typography>
+                          {convertTime(depart.departureTime)} - {convertTime(arrive.arrivalTime)}
+                        </Typography>
+                      </Box>
+                      <Typography>
+                        {tickets.length > 1 ?
+                        `${tickets.length-1} stop`
+                        :
+                        "Nonstop"
+                        }
+                      </Typography>
                     </Box>
                     <Grid item lg={12}>
                       <Card className={`${classes.line}`}></Card>
@@ -51,7 +100,7 @@ export default function TripDetails() {
                         Price per passenger
                       </Typography>
                       <Typography>
-                        $$$
+                        ${booking.total_price}
                       </Typography>
                     </Box>
                     <Box className={`${classes.price}`}>
@@ -59,7 +108,7 @@ export default function TripDetails() {
                         Taxes and Fees per passenger
                       </Typography>
                       <Typography>
-                        $$$
+                        ${fees + (booking.total_price * taxes)}
                       </Typography>
                     </Box>
                     <Grid item lg={12}>
@@ -70,7 +119,7 @@ export default function TripDetails() {
                         Total per passenger
                       </Typography>
                       <Typography>
-                        $$$
+                        ${booking.total_price + fees + (booking.total_price * taxes)}
                       </Typography>
                     </Box>
                     <Box className={`${classes.price}`}>
@@ -89,13 +138,14 @@ export default function TripDetails() {
                         Flight Total
                       </Typography>
                       <Typography>
-                        $$$
+                      ${booking.total_price + fees + (booking.total_price * taxes)}
                       </Typography>
                     </Box>
                   </Card>
                   </Box>
                   <Box className={`${classes.paperLower}`}>
-                    <Button 
+                    <Button
+                        onClick={handleCancel} 
                         variant="contained"
                         sx={{
                           boxShadow: 3, 
@@ -110,6 +160,7 @@ export default function TripDetails() {
                         Cancel Booking
                       </Button>
                       <Button 
+                      onClick={handleContinue}
                       variant="contained"
                       sx={{
                         marginLeft:2,
