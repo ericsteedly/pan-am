@@ -35,7 +35,6 @@ const catchError = (err) => {
 
 export const fetchWithResponse = async (resource, options) => {
   const data = await fetch(`${API_URL}/${resource}`, options)
-  console.log(data)
   const convertData = await data.json()
   return convertData
 

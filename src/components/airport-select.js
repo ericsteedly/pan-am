@@ -54,6 +54,7 @@ export default function AirportSelect({ label, airports, refEl }) {
                         ...params.inputProps,
                         autoComplete: 'new-password'
                     }}
+                    required={true}
                 />
             )}
         />

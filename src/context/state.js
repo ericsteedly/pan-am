@@ -1,9 +1,10 @@
+import { getUserAccount } from "@/data/auth";
 import { createContext, useContext, useEffect, useState } from "react";
 
 const AppContext = createContext()
 
 export function AppWrapper({ children }) {
-    const [profile, setProfile] = useState({})
+    const [account, setAccount] = useState({})
     const [token, setToken] = useState('')
     const [departQuery, setDepartQuery] = useState(()=>{
         if (typeof window !== 'undefined') {
@@ -33,8 +34,12 @@ export function AppWrapper({ children }) {
     useEffect(()=>{
         if (token) {
             localStorage.setItem('token', token)
-            if (!'id' in profile) {
-                console.log('NEED TO GET PROFILE')
+            if (!'id' in account) {
+                getUserAccount().then((res)=>{
+                    if(res) {
+                        setAccount(res)
+                    }
+                })
             }
         }
     },[token])
@@ -42,12 +47,12 @@ export function AppWrapper({ children }) {
     return (
         <AppContext.Provider 
             value={{ 
-                profile, 
+                account, 
                 token,
                 departQuery,
                 returnQuery, 
                 setToken, 
-                setProfile,
+                setAccount,
                 setDepartQuery,
                 setReturnQuery
             }}

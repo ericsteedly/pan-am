@@ -11,15 +11,39 @@ export const createBooking = (flights) => {
     })
 }
 
-export const retrieveBooking = (bookingId) => {
-    fetchWithResponse(`bookings/${bookingId}`, {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json",
-            Authorization: `Token ${localStorage.getItem("token")}`
+// export const retrieveBooking = (bookingId) => {
+//     fetchWithResponse(`bookings/${bookingId}`, {
+//         method: "GET",
+//         headers: {
+//             "Content-Type": "application/json",
+//             Authorization: `Token ${localStorage.getItem("token")}`
+//         }
+//     })
+// } 
+
+export const retrieveBooking = async (bookingId) => {
+    return await fetch(`http://localhost:8000/bookings/${bookingId}`,
+        {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Token ${localStorage.getItem("token")}`
+            }
         }
-    })
-} 
+    )
+}
+
+export const retrieveRoundTrip = async (roundTripId) => {
+    return await fetch(`http://localhost:8000/bookings/${roundTripId}/retrieveRoundtrip`,
+        {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Token ${localStorage.getItem("token")}`
+            }
+        }
+    )
+}
 
 export const createRoundTrip = (roundTripObj) => {
     return fetchWithResponse("bookings/roundtrip", {
