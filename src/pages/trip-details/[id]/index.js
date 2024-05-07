@@ -1,6 +1,6 @@
 import Layout from "@/components/layout"
 import NavBar from "@/components/navbar/navBar"
-import { Grid, Button, Typography, Paper, Box, Card } from "@mui/material"
+import { Grid, Button, Typography, Paper, Box, Card, Link } from "@mui/material"
 import classes from "./trip-details.module.css"
 import { useEffect, useState } from "react"
 import { deleteBooking, retrieveBooking } from "@/data/booking"
@@ -27,7 +27,7 @@ export default function TripDetails() {
   }
 
   const handleContinue = () => {
-      router.push(`ticket-form/${booking.id}`)
+      router.push(`//ticket-form/${booking.id}`)
   }
 
   useEffect(()=>{
