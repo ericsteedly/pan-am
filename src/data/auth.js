@@ -29,17 +29,17 @@ export function getUserAccount() {
   });
 }
 
-export function editUserAccount(userId, userObj) {
+export async function editUserAccount(userId, userObj) {
     // Retrieve the CSRF token from the Django server
-    fetch('http://localhost:8000/csrf', {
+    await fetch('http://localhost:8000/csrf', {
       credentials: 'include', // Include cookies in the request
     })
       .then(response => response.json())
-      .then(data => {
+      .then(async data => {
         const csrfToken = data.csrfToken;
 
         // Make the request to update the User object
-        fetch(`http://localhost:8000/account/${userId}`, {
+        await fetch(`http://localhost:8000/account/${userId}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
@@ -49,7 +49,9 @@ export function editUserAccount(userId, userObj) {
           body: JSON.stringify(userObj),
           credentials: 'include', 
         })
-        .then(response => {
+        .then(async response => {
+          const res = await response.json()
+          return res
         })
         .catch(error => {
         });
