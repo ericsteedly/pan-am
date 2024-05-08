@@ -9,7 +9,7 @@ import { useRouter } from "next/router"
 
 export default function EditAccount() {
   const router = useRouter()
-  const { account } = useAppContext()
+  const { account, setAccount } = useAppContext()
 
   const dob = account.customer?.date_of_birth
   const phone = account.customer?.phone_number
@@ -29,8 +29,14 @@ export default function EditAccount() {
        phone_number: phone_number.current.value,
        date_of_birth: date_of_birth.current.value
     }
-    editUserAccount(account.id, accountObj)
-    router.push("/account")
+    editUserAccount(account.id, accountObj).then(()=>{
+      getUserAccount().then((res)=>{
+        if(res) {
+            setAccount(res)
+        }
+        })
+      router.push("/account")
+    })
   }
 
   return (
