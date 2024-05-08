@@ -44,7 +44,7 @@ export default function TripDetails() {
         window.alert("Please select a payment type")
       } else {
       editBooking(paymentObj, booking.id)
-      router.push(`//bookings`)
+      router.push(`/bookings`)
       }
   }
 
