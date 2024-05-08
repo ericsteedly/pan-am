@@ -34,7 +34,7 @@ export function AppWrapper({ children }) {
     useEffect(()=>{
         if (token) {
             localStorage.setItem('token', token)
-            if (!'id' in account) {
+            if (!('id' in account)) {
                 getUserAccount().then((res)=>{
                     if(res) {
                         setAccount(res)
