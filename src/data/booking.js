@@ -33,6 +33,28 @@ export const deleteBooking = (bookingId) => {
     })
 }
 
+export const editBooking = (paymentObj, bookingId) => {
+    return fetchWithoutResponse(`bookings/${bookingId}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Token ${localStorage.getItem("token")}`
+        },
+        body: JSON.stringify (paymentObj)
+    })
+}
+
+export const listBookings = () => {
+    return fetchWithResponse("bookings", {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Token ${localStorage.getItem("token")}`
+        }
+    })
+}
+
+
 export const retrieveBooking = async (bookingId) => {
     return await fetch(`http://localhost:8000/bookings/${bookingId}`,
         {

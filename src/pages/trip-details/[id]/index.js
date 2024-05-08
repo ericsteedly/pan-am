@@ -3,10 +3,14 @@ import NavBar from "@/components/navbar/navBar"
 import { Grid, Button, Typography, Paper, Box, Card, Link } from "@mui/material"
 import classes from "./trip-details.module.css"
 import { useEffect, useState } from "react"
-import { deleteBooking, retrieveBooking } from "@/data/booking"
+import { deleteBooking, editBooking, retrieveBooking } from "@/data/booking"
 import { useRouter } from "next/router"
 import formatDate from "@/components/utility/date-formatter"
 import convertTime from "@/components/utility/convert-time"
+import PaymentSelect from "@/components/payment-select"
+import { getPayments } from "@/data/payment"
+import AddCardSharpIcon from '@mui/icons-material/AddCardSharp';
+import PaymentModal from "@/components/payment-modal"
 
 export default function TripDetails() {
   const router = useRouter()
@@ -15,8 +19,14 @@ export default function TripDetails() {
   const [tickets, setTickets] = useState([])
   const [depart, setDepart] = useState({})
   const [arrive, setArrive] = useState({})
+  const [paymentList, setPaymentList] = useState([])
+  const [payment, setPayment] = useState({})
+  const [openModal, setOpenModal] = useState(false)
   const taxes = .10
   const fees = 12.00
+
+  const handleOpenModal = () => setOpenModal(true);
+  const handleCloseModal = () => setOpenModal(false);
 
   const handleCancel = () => {
     const bookingObj = {
@@ -26,15 +36,24 @@ export default function TripDetails() {
     router.push("/")
   }
 
-  const handleContinue = () => {
-      router.push(`//ticket-form/${booking.id}`)
+  const handleBook = () => {
+      const paymentObj = {
+        payment_id: payment.id
+      }
+      if (!payment.id) {
+        window.alert("Please select a payment type")
+      } else {
+      editBooking(paymentObj, booking.id)
+      router.push(`//bookings`)
+      }
   }
 
   useEffect(()=>{
+    if(id) {
     retrieveBooking(id).then((res)=>{
       setBooking(res)
       setTickets(res.tickets)
-    })
+    })}
   },[id])
 
   useEffect(()=>{
@@ -48,6 +67,12 @@ export default function TripDetails() {
       }
     }
   },[tickets])
+
+  useEffect(()=>{
+    getPayments().then((res)=>{
+      setPaymentList(res)
+    })
+  },[])
   
   return (
     <>
@@ -145,9 +170,43 @@ export default function TripDetails() {
                   </Box>
                   <Box className={`${classes.paperLower}`}>
                     <Button
+                      onClick={handleOpenModal}
+                      sx={{
+                        boxShadow: 3, 
+                        backgroundColor: '#3182E5',
+                        marginRight: 1,
+                        color: 'white',
+                        ":hover": {
+                            backgroundColor: '#A1A1A1',
+                            color: 'white'
+                        }
+                      }}
+                    >
+                      New
+                      <AddCardSharpIcon sx={{ marginLeft: 1}}/>
+                    </Button>
+                    <PaymentModal openModal={openModal} handleCloseModal={handleCloseModal} setPayment={setPayment}/>
+                    <PaymentSelect paymentList={paymentList} setPayment={setPayment} />
+                    <Button 
+                      onClick={handleBook}
+                      variant="contained"
+                      sx={{
+                        boxShadow: 3, 
+                        backgroundColor: '#F3B12C',
+                        color: 'black',
+                        ":hover": {
+                            backgroundColor: '#A1A1A1',
+                            color: 'white'
+                        }
+                    }}
+                    >
+                      Book Trip!
+                    </Button>
+                    <Button
                         onClick={handleCancel} 
                         variant="contained"
                         sx={{
+                          marginLeft:2,
                           boxShadow: 3, 
                           backgroundColor: '#F3B12C',
                           color: 'white',
@@ -159,22 +218,6 @@ export default function TripDetails() {
                       >
                         Cancel Booking
                       </Button>
-                      <Button 
-                      onClick={handleContinue}
-                      variant="contained"
-                      sx={{
-                        marginLeft:2,
-                        boxShadow: 3, 
-                        backgroundColor: '#F3B12C',
-                        color: 'white',
-                        ":hover": {
-                            backgroundColor: '#A1A1A1',
-                            color: 'white'
-                        }
-                    }}
-                    >
-                      Continue to Payment
-                    </Button>
                   </Box>
             </Paper>
           </Grid>
