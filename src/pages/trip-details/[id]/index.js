@@ -72,7 +72,7 @@ export default function TripDetails() {
     getPayments().then((res)=>{
       setPaymentList(res)
     })
-  },[])
+  },[payment])
   
   return (
     <>
@@ -185,7 +185,7 @@ export default function TripDetails() {
                       New
                       <AddCardSharpIcon sx={{ marginLeft: 1}}/>
                     </Button>
-                    <PaymentModal openModal={openModal} handleCloseModal={handleCloseModal} setPayment={setPayment}/>
+                    <PaymentModal openModal={openModal} handleCloseModal={handleCloseModal} setPayment={setPayment} />
                     <PaymentSelect paymentList={paymentList} setPayment={setPayment} />
                     <Button 
                       onClick={handleBook}

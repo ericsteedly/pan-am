@@ -1,20 +1,39 @@
 import Layout from "@/components/layout"
 import NavBar from "@/components/navbar/navBar"
 import formatDate from "@/components/utility/date-formatter"
-import { listBookings } from "@/data/booking"
-import { Grid, Paper, Typography } from "@mui/material"
+import { deleteBooking, listBookings } from "@/data/booking"
+import { Box, Button, Grid, Link, Paper, Typography } from "@mui/material"
+import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 
 
 export default function Bookings() {
+  const router = useRouter()
   const [bookings, setBookings] = useState([])
 
+  const handleDelete = (id) => {
+    const cancel = window.confirm("Are you sure you would like to delete this flight?")
+    if (cancel){
+      const bookingObj = {
+        booking_id: id
+      }
+      deleteBooking(bookingObj)
+      getSetBookings()
+      router.reload()
+    }
+  }
 
-  useEffect(()=>{
+  const getSetBookings = () => {
     listBookings().then((res)=>{
       setBookings(res)
     })
+  }
+
+  useEffect(()=>{
+    getSetBookings()
   },[])
+
+
 
   return (
     <>
@@ -31,12 +50,46 @@ export default function Bookings() {
           return (
             <Grid item key={booking.id} lg={8}>
             <Paper sx={{padding: 4}}>
-              <Typography variant="h4">
-                {booking.tickets[destination].flight.arrivalAirport.city}
-              </Typography>
-              <Typography variant="h5">
-                {formatDate(booking.tickets[0].flight.departureDay)}
-              </Typography>
+              <Box sx={{}}>
+                <Typography variant="h4">
+                  {booking.tickets[destination].flight.arrivalAirport.city}
+                </Typography>
+                <Typography variant="h5">
+                  {formatDate(booking.tickets[0].flight.departureDay)}
+                </Typography>
+              </Box>
+              <Box sx={{display: 'flex', justifyContent: 'flex-end'}}>
+              <Button
+                  onClick={()=>{handleDelete(booking.id)}}
+                  variant="contained"
+                  sx={{
+                    boxShadow: 3, 
+                    backgroundColor: '#F3B12C',
+                    color: 'white',
+                    ":hover": {
+                        backgroundColor: '#A1A1A1',
+                        color: 'white'
+                    }
+                }}
+                >
+                Cancel
+              </Button>
+              <Button
+                  variant="contained"
+                  sx={{
+                    ml: 4,
+                    boxShadow: 3, 
+                    backgroundColor: '#3182E5',
+                    color: 'white',
+                    ":hover": {
+                        backgroundColor: '#A1A1A1',
+                        color: 'white'
+                    }
+                }}
+                >
+                Change
+              </Button>
+              </Box>
             </Paper>
           </Grid>
           )})

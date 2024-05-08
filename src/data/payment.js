@@ -20,3 +20,13 @@ export const newPayment = async (paymentObj) => {
         body: JSON.stringify(paymentObj)
     })
 }
+
+export const deletePayment = async (paymentId) => {
+    return fetchWithResponse(`payments/${paymentId}`, {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Token ${localStorage.getItem("token")}`
+        }
+    })
+}

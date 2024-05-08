@@ -1,0 +1,46 @@
+.mainPaper {
+    display: flex;
+    margin: 20px 10px; 
+    flex-direction: column;
+    padding: 10px 0px 20px 0px;
+}
+
+.titleContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.title {
+    font-weight:500;
+}
+
+.formMain {
+    display: flex;
+    margin: 10px 20px;
+    justify-content: space-evenly;
+}
+
+.formLeft {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+}
+
+.detailBox {
+    margin: 10px;
+}
+
+.formRight {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+}
+
+.lower {
+    display: flex;
+    justify-content: flex-end;
+    margin: 20px
+}
