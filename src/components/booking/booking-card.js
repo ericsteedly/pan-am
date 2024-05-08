@@ -2,9 +2,13 @@ import { Box, Button, Card, Grid, Paper, Typography } from "@mui/material"
 import formatDate from "../utility/date-formatter"
 import convertTime from "../utility/convert-time"
 import { useState, useEffect } from "react"
+import { useAppContext } from "@/context/state"
+import { useRouter } from "next/router"
 
 
 export default function BookingCard({ booking, handleDelete, destination}) {
+    const router = useRouter()
+    const { setDepartQuery, setReturnQuery } = useAppContext()
     const [tickets, setTickets] = useState([])
     const [depart, setDepart] = useState({})
     const [arrive, setArrive] = useState({})
@@ -17,13 +21,28 @@ export default function BookingCard({ booking, handleDelete, destination}) {
     if (tickets.length) {
         setDepart(tickets[0].flight)
         if (tickets.length > 0) {
-        const lastFlight = tickets.length-1
-        setArrive(tickets[lastFlight].flight)
+          const lastFlight = tickets.length-1
+          setArrive(tickets[lastFlight].flight)
         } else {
-        setArrive(tickets[0].flight)
+          setArrive(tickets[0].flight)
         }
     }
     },[tickets])
+
+    const editFlight = async (event) => {
+      event.preventDefault()
+      const d = depart.departureAirport.id
+      const a = arrive.arrivalAirport.id
+      const date = depart.departureDay
+      const departQuery = `departureAirport=${d}&arrivalAirport=${a}&departureDay=${date}`
+  
+      try {
+        setDepartQuery(departQuery)
+        router.push("select-flight")
+      } catch (error) {
+        console.error('Error fetching flights', error)
+      }
+    }
 
     return (
     <>
@@ -83,6 +102,7 @@ export default function BookingCard({ booking, handleDelete, destination}) {
                     Cancel
                     </Button>
                     <Button
+                        onClick={editFlight}
                         variant="contained"
                         sx={{
                         ml: 4,
