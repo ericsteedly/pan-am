@@ -4,7 +4,7 @@ export default function PaymentSelect({ paymentList, setPayment }) {
   return (
     <>
         <Autocomplete 
-            id="airport-select"
+            id="payment-select"
             sx={{ width: 300, marginRight: 2 }}
             autoHighlight
             onChange={(event, newValue) => {

@@ -1,8 +1,9 @@
+import BookingCard from "@/components/booking/booking-card"
 import Layout from "@/components/layout"
 import NavBar from "@/components/navbar/navBar"
 import formatDate from "@/components/utility/date-formatter"
 import { deleteBooking, listBookings } from "@/data/booking"
-import { Box, Button, Grid, Link, Paper, Typography } from "@mui/material"
+import { Grid } from "@mui/material"
 import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 
@@ -48,50 +49,7 @@ export default function Bookings() {
         {bookings ? bookings.map((booking)=> {
           const destination = booking.tickets.length-1
           return (
-            <Grid item key={booking.id} lg={8}>
-            <Paper sx={{padding: 4}}>
-              <Box sx={{}}>
-                <Typography variant="h4">
-                  {booking.tickets[destination].flight.arrivalAirport.city}
-                </Typography>
-                <Typography variant="h5">
-                  {formatDate(booking.tickets[0].flight.departureDay)}
-                </Typography>
-              </Box>
-              <Box sx={{display: 'flex', justifyContent: 'flex-end'}}>
-              <Button
-                  onClick={()=>{handleDelete(booking.id)}}
-                  variant="contained"
-                  sx={{
-                    boxShadow: 3, 
-                    backgroundColor: '#F3B12C',
-                    color: 'white',
-                    ":hover": {
-                        backgroundColor: '#A1A1A1',
-                        color: 'white'
-                    }
-                }}
-                >
-                Cancel
-              </Button>
-              <Button
-                  variant="contained"
-                  sx={{
-                    ml: 4,
-                    boxShadow: 3, 
-                    backgroundColor: '#3182E5',
-                    color: 'white',
-                    ":hover": {
-                        backgroundColor: '#A1A1A1',
-                        color: 'white'
-                    }
-                }}
-                >
-                Change
-              </Button>
-              </Box>
-            </Paper>
-          </Grid>
+              <BookingCard key={booking.id} booking={booking} handleDelete={handleDelete} destination={destination}/>
           )})
         :
         ""

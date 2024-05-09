@@ -44,7 +44,7 @@ export default function TripDetails() {
         window.alert("Please select a payment type")
       } else {
       editBooking(paymentObj, booking.id)
-      router.push(`//bookings`)
+      router.push(`/bookings`)
       }
   }
 
@@ -96,7 +96,7 @@ export default function TripDetails() {
                       </Typography>
                     </Box>
                     <Box className={`${classes.flightBox}`}>
-                      <Typography>
+                      <Typography variant="h5">
                         {tickets.length ? formatDate(tickets[0].flight.departureDay) : ""}
                       </Typography>
                       <Box className={`${classes.flightDetail}`}>
@@ -107,13 +107,24 @@ export default function TripDetails() {
                           {convertTime(depart.departureTime)} - {convertTime(arrive.arrivalTime)}
                         </Typography>
                       </Box>
-                      <Typography>
-                        {tickets.length > 1 ?
-                        `${tickets.length-1} stop`
-                        :
-                        "Nonstop"
-                        }
-                      </Typography>
+                      {tickets.length > 1 ?
+                      <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+                        <Card sx={{margin: 2, padding: 1, backgroundColor: "lightgrey"}}>
+                          <Typography fontWeight="700">
+                            {tickets.length-1} stop
+                          </Typography>
+                        </Card>
+                        <Typography >
+                          {tickets[0].flight.arrivalAirport.city}
+                        </Typography>
+                      </Box>
+                      :
+                      <Card sx={{margin: 2, padding: 1, backgroundColor: "lightgrey"}}>
+                        <Typography fontWeight="700">
+                          Nonstop
+                        </Typography>
+                      </Card>
+                      }
                     </Box>
                     <Grid item lg={12}>
                       <Card className={`${classes.line}`}></Card>
