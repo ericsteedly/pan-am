@@ -38,7 +38,7 @@ export default function BookingCard({ booking, handleDelete, destination}) {
   
       try {
         setDepartQuery(departQuery)
-        router.push("select-flight")
+        router.push(`select-flight?id=${booking.id}`)
       } catch (error) {
         console.error('Error fetching flights', error)
       }
@@ -49,6 +49,11 @@ export default function BookingCard({ booking, handleDelete, destination}) {
         <Grid item key={booking.id} lg={8}>
             <Paper sx={{padding: 4}}>
               <Box >
+                {booking.tickets.length > 1 ? 
+                <Typography> Flight# {booking.tickets[0].flight.id}/{booking.tickets[1].id}</Typography>
+                :
+                <Typography>Flight#{booking.tickets[0].flight.id}</Typography>
+                }
                 <Typography variant="h4" fontWeight="800" color='#3182E5'>
                   {booking.tickets[destination].flight.arrivalAirport.city}
                 </Typography>

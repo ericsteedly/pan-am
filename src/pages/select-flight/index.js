@@ -11,6 +11,7 @@ import formatDate from "@/components/utility/date-formatter"
 import FlightCards from "@/components/flights/flight-cards"
 import { createBooking, createRoundTrip } from "@/data/booking"
 import { useRouter } from "next/router"
+import { deleteTickets, editTickets } from "@/data/ticket"
 
 
 export default function SelectFlightList() {
@@ -57,19 +58,35 @@ export default function SelectFlightList() {
             }
             flightPackage.push(flightObj)
         })
-        createBooking(flightPackage).then((res)=>{
-            if (departBookingId) {
-            const roundtripObj = {
-                departure_id: departBookingId,
-                return_id: res.id
+
+        if (router.query.id){
+            const confirmed = window.confirm("Are you sure you want to change this flight?")
+            if(confirmed){
+                const editObj = {
+                    booking_id: router.query.id,
+                    flights: flightPackage
+                }
+                deleteTickets(router.query.id).then(()=>{
+                    editTickets(editObj)
+                    router.push("bookings")
+                })
             }
-            createRoundTrip(roundtripObj).then((res)=>{
-                router.push(`trip-details/${res.id}/roundtrip`)
+                
+        } else {
+            createBooking(flightPackage).then((res)=>{
+                if (departBookingId) {
+                const roundtripObj = {
+                    departure_id: departBookingId,
+                    return_id: res.id
+                }
+                createRoundTrip(roundtripObj).then((res)=>{
+                    router.push(`trip-details/${res.id}/roundtrip`)
+                })
+                } else {
+                router.push(`trip-details/${res.id}`)
+                }
             })
-            } else {
-            router.push(`trip-details/${res.id}`)
-            }
-        })
+        }
     }
 
     const handleNextFlight = (event) => {
@@ -138,7 +155,8 @@ export default function SelectFlightList() {
                 </Grid>
                     <FlightCards flightList={flightList} flightChoice={flightChoice} setFlightChoice={setFlightChoice}/>
                     <Grid item lg={8} className={`${classes.buttonBox}`}>
-                    {returnQuery == null || returnFlight ?                 
+                    {returnQuery == null || returnFlight ?
+                                       
                         <Button 
                             variant="contained"
                             disabled={flightChoice.length ? false : true}
@@ -156,7 +174,7 @@ export default function SelectFlightList() {
                             }}
                         >
                             Continue
-                        </Button>
+                        </Button> 
                         :
                         <Button 
                             variant="contained"
