@@ -76,7 +76,7 @@ export default function RoundTrip() {
     useEffect(()=>{
       const price = departBooking?.total_price + returnBooking?.total_price
       setTotalPrice(price)
-    },[departBooking, retrieveBooking])
+    },[departBooking, returnBooking])
 
     useEffect(()=>{
       if (departTickets.length) {
