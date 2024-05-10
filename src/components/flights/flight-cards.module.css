@@ -5,6 +5,7 @@
 .flightCard {
     display: flex;
     flex-direction: row;
+    justify-content: space-evenly;
     background-color: rgb(203, 199, 199);
     padding: 15px 0px 15px 15px;
     border-radius: 0;
