@@ -49,7 +49,7 @@ export default function Login() {
           sm={4}
           md={7}
           sx={{
-            backgroundImage: 'url(https://www.nps.gov/articles/000/images/Pan-Am-Image-1-Transpacific-Poster.jpg?maxwidth=650&autorotate=false)',
+            backgroundImage: 'url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3X_bEdqdeDc13XIk7qWEX9FDcjdFYYc4Sa8dKqD9yRN3k2GauRISpKUh_N50nwID8VCc&usqp=CAU)',
             backgroundRepeat: 'no-repeat',
             backgroundColor: (t) =>
               t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
