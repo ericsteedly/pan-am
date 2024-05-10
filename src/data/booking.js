@@ -79,13 +79,14 @@ export const retrieveRoundTrip = async (roundTripId) => {
     ).then((res)=>res.json())
 }
 
+export const deleteRoundtrip = (roundtripObj) => {
+    return fetchWithoutResponse("bookings/roundtrip", {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Token ${localStorage.getItem("token")}`
+        },
+        body: JSON.stringify (roundtripObj)
+    })
+}
 
-// export const retrieveBooking = (bookingId) => {
-//     fetchWithResponse(`bookings/${bookingId}`, {
-//         method: "GET",
-//         headers: {
-//             "Content-Type": "application/json",
-//             Authorization: `Token ${localStorage.getItem("token")}`
-//         }
-//     })
-// } 

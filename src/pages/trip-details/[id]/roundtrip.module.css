@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     margin: 20px 10px; 
-    padding: 10px 0px 20px 0px;
+    padding: 0px 0px 20px 0px;
 }
 
 .titleContainer {
@@ -11,28 +11,46 @@
 }
 
 .title {
-    font-weight:500;
+    font-weight:800;
+    margin-top: 10px;
+    margin-left: 10px;
 }
 
 .paperUpper {
     display: flex;
-    flex-basis: 100%;
+    flex-basis: 80%;
 }
 
 .paperLower {
     display: flex;
     justify-content: flex-end;
+    margin: 20px 10px 5px;
+    flex-basis: 20%;
 }
 
 .flightMain {
     display: flex;
     flex-direction: column;
     flex-basis: 65%;
-    border: dotted 1px red;
 }
 
 .flightBox {
     display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 50px;
+}
+.returnFlightBox {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.flightDetail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .line {
@@ -43,4 +61,12 @@
 .pricingMain {
     background-color: rgb(128, 173, 128);
     flex-basis: 35%;
+    padding-top: 20px;
+    padding-bottom: 5px;
+}
+
+.price {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
 }

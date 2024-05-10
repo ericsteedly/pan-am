@@ -39,6 +39,7 @@ export default function BookingCard({ booking, handleDelete, destination}) {
       try {
         setDepartQuery(departQuery)
         router.push(`select-flight?id=${booking.id}`)
+
       } catch (error) {
         console.error('Error fetching flights', error)
       }

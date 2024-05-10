@@ -170,7 +170,7 @@ export default function TripDetails() {
                       <Card className={`${classes.line}`}></Card>
                     </Grid>
                     <Box className={`${classes.price}`}>
-                      <Typography>
+                      <Typography variant="h6">
                         Flight Total
                       </Typography>
                       <Typography>

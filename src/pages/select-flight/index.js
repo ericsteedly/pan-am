@@ -24,6 +24,7 @@ export default function SelectFlightList() {
     const [returnFlight, setReturnFlight] = useState(false)
     const [departBookingId, setDepartBookingId] = useState(0)
     const router = useRouter()
+    const { id } = router.query
 
 
 
@@ -79,15 +80,19 @@ export default function SelectFlightList() {
                     departure_id: departBookingId,
                     return_id: res.id
                 }
-                createRoundTrip(roundtripObj).then((res)=>{
-                    router.push(`trip-details/${res.id}/roundtrip`)
+                    createRoundTrip(roundtripObj).then((res)=>{
+                        router.push(`trip-details/${res.id}/roundtrip?departId=${res.departure_booking}&returnId=${res.return_booking}`)
                 })
                 } else {
-                router.push(`trip-details/${res.id}`)
+                    router.push(`trip-details/${res.id}`)
                 }
             })
         }
     }
+
+    useEffect(()=>{
+
+    },[])
 
     const handleNextFlight = (event) => {
         const flightPackage = []
@@ -148,15 +153,14 @@ export default function SelectFlightList() {
                         </Typography>
                     </Box>
                     <Box className={`${classes.labelBox}`}>
-                        <Typography fontSize={15} fontWeight={600}>
+                        <Typography fontSize={15} fontWeight={600} marginRight={2}>
                             Ticket 
                         </Typography>
                     </Box>
                 </Grid>
                     <FlightCards flightList={flightList} flightChoice={flightChoice} setFlightChoice={setFlightChoice}/>
                     <Grid item lg={8} className={`${classes.buttonBox}`}>
-                    {returnQuery == null || returnFlight ?
-                                       
+                    {returnQuery == null || returnFlight || id ?       
                         <Button 
                             variant="contained"
                             disabled={flightChoice.length ? false : true}
