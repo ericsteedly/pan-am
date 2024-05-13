@@ -49,11 +49,11 @@ export default function Login() {
           sm={4}
           md={7}
           sx={{
-            backgroundImage: 'url(https://www.nps.gov/articles/000/images/Pan-Am-Image-1-Transpacific-Poster.jpg?maxwidth=650&autorotate=false)',
+            backgroundImage: 'url(https://airlineemployeeshop.com/cdn/shop/products/paa_001roundcoaster_480x480.png?v=1611169846)',
             backgroundRepeat: 'no-repeat',
             backgroundColor: (t) =>
               t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
-            backgroundSize: 620,
+            backgroundSize: 600,
             backgroundPosition: 'center',
           }}
         />

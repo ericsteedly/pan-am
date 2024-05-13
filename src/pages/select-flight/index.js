@@ -149,7 +149,7 @@ export default function SelectFlightList() {
                     </Box>
                     <Box className={`${classes.labelBox}`}>
                         <Typography fontSize={15} fontWeight={600}>
-                            Duration
+                            {/* Duration */}
                         </Typography>
                     </Box>
                     <Box className={`${classes.labelBox}`}>
