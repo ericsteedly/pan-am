@@ -64,7 +64,7 @@ export default function FlightCards({ flightList, flightChoice, setFlightChoice 
                                 </Box>
                                 <Box className={`${classes.durationBox}`}>
                                     <Typography variant="h6">
-                                        {/* {convertDuration(flight.total_duration)} */}
+                                        {convertDuration(flight.total_duration)}
                                     </Typography>
                                 </Box>
                                 <Box className={`${classes.toggleBox}`}> 
@@ -109,7 +109,7 @@ export default function FlightCards({ flightList, flightChoice, setFlightChoice 
                                 </Box>
                                 <Box className={`${classes.durationBox}`}>
                                     <Typography variant="h6">
-                                        {/* {convertDuration(flight.duration)} */}
+                                        {convertDuration(flight.duration)}
                                     </Typography>
                                 </Box>
                                 <Box className={`${classes.toggleBox}`}> 
