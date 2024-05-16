@@ -1,4 +1,4 @@
-import { AppBar, Box, Container, Link, Toolbar, Typography } from "@mui/material"
+import { AppBar, Box, Link, Toolbar, Typography } from "@mui/material"
 import MainMenu from "./main-menu"
 
 
@@ -19,7 +19,9 @@ export default function NavBar() {
                     flexGrow: 2
                 }}
             >
-                PAN-AM
+                <Link href="/" underline="none" color="inherit">
+                    PAN-AM
+                </Link>
             </Typography>
             <MainMenu />
         </Toolbar>

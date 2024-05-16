@@ -43,11 +43,19 @@ export default function SelectFlightList() {
 
     useEffect(()=>{
         if (flightList.length) {
-            let res = flightList.find(flight => flight.departureAirport)
-            setDepart(res.departureAirport.airport_code)
-            setArrive(res.arrivalAirport.airport_code)
-            let newDate = formatDate(res.departureDay)
-            setDate(newDate)
+            if (flightList[0].flight1){
+                const x = flightList[0]
+                setDepart(x.flight1.departureAirport.airport_code)
+                setArrive(x.flight2.arrivalAirport.airport_code)
+                let newDate = formatDate(x.flight1.departureDay)
+                setDate(newDate)
+            } else {
+                const x = flightList[0]
+                setDepart(x.departureAirport.airport_code)
+                setArrive(x.arrivalAirport.airport_code)
+                let newDate = formatDate(x.departureDay)
+                setDate(newDate)
+            }
         }
     },[flightList])
 
@@ -90,10 +98,6 @@ export default function SelectFlightList() {
         }
     }
 
-    useEffect(()=>{
-
-    },[])
-
     const handleNextFlight = (event) => {
         const flightPackage = []
         flightChoice.map(flight => {
@@ -119,45 +123,69 @@ export default function SelectFlightList() {
                     justifyContent: 'center'
                  }}
             >
-                <Grid item lg={8}>
-                    <Card className={`${classes.headerCard}`}>
-                        {returnFlight ? 
-                        <Typography variant="h5" className={`${classes.title}`}>
-                            Return: {depart} to {arrive}
-                        </Typography>
-                        :
-                        <Typography variant="h5" className={`${classes.title}`}>
-                            Depart: {depart} to {arrive}
-                        </Typography>
-                        }
-                        <Typography variant="h6">{date}</Typography>
-                    </Card>
-                </Grid>
-                <Grid item lg={8}>
-                    <Card className={`${classes.line}`}></Card>
-                </Grid>
-                <Grid item lg={8} className={`${classes.labelBar}`}>
-                    <Box className={`${classes.departLabelBox}`}> 
-                        <Typography fontSize={20} fontWeight={600}>
-                            Departing Flights
-                        </Typography>
-                    </Box>
-                    <Box className={`${classes.labelBox}`}>
-                        <Typography fontSize={15} fontWeight={600}>
-                            Number of Stops
-                        </Typography>
-                    </Box>
-                    <Box className={`${classes.labelBox}`}>
-                        <Typography fontSize={15} fontWeight={600}>
-                            {/* Duration */}
-                        </Typography>
-                    </Box>
-                    <Box className={`${classes.labelBox}`}>
-                        <Typography fontSize={15} fontWeight={600} marginRight={2}>
-                            Ticket 
-                        </Typography>
-                    </Box>
-                </Grid>
+                {!flightList.length ?
+                <Box sx={{backgroundColor: 'rgb(203, 199, 199)', display: 'flex', justifyContent: 'center', width: '100%', padding: 4}}>
+                    <Typography variant="h4">
+                        No flights found
+                    </Typography>
+                    <Button 
+                            variant="contained"
+                            onClick={()=>{router.push("/")}}
+                            sx={{
+                                marginLeft: 6,
+                                boxShadow: 3, 
+                                backgroundColor: '#F3B12C',
+                                color: 'white',
+                                ":hover": {
+                                    backgroundColor: '#A1A1A1',
+                                    color: 'white'
+                                }
+                            }}
+                        >
+                            Edit Search
+                        </Button> 
+                </Box> 
+                : 
+                <>
+                    <Grid item lg={8}>
+                        <Card className={`${classes.headerCard}`}>
+                            {returnFlight ? 
+                            <Typography variant="h5" className={`${classes.title}`}>
+                                Return: {depart} to {arrive}
+                            </Typography>
+                            :
+                            <Typography variant="h5" className={`${classes.title}`}>
+                                Depart: {depart} to {arrive}
+                            </Typography>
+                            }
+                            <Typography variant="h6">{date}</Typography>
+                        </Card>
+                    </Grid>
+                    <Grid item lg={8}>
+                        <Card className={`${classes.line}`}></Card>
+                    </Grid>
+                    <Grid item lg={8} className={`${classes.labelBar}`}>
+                        <Box className={`${classes.departLabelBox}`}> 
+                            <Typography fontSize={20} fontWeight={600}>
+                                Departing Flights
+                            </Typography>
+                        </Box>
+                        <Box className={`${classes.labelBox}`}>
+                            <Typography fontSize={15} fontWeight={600}>
+                                Number of Stops
+                            </Typography>
+                        </Box>
+                        <Box className={`${classes.labelBox}`}>
+                            <Typography fontSize={15} fontWeight={600}>
+                                Duration
+                            </Typography>
+                        </Box>
+                        <Box className={`${classes.labelBox}`}>
+                            <Typography fontSize={15} fontWeight={600} marginRight={2}>
+                                Ticket 
+                            </Typography>
+                        </Box>
+                    </Grid>
                     <FlightCards flightList={flightList} flightChoice={flightChoice} setFlightChoice={setFlightChoice}/>
                     <Grid item lg={8} className={`${classes.buttonBox}`}>
                     {returnQuery == null || returnFlight || id ?       
@@ -200,6 +228,8 @@ export default function SelectFlightList() {
                         </Button>
                     }
                     </Grid>
+                </>
+                }
             </Grid>
         </>
     )
