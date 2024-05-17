@@ -1,7 +1,9 @@
 import BookingCard from "@/components/booking/booking-card"
 import Layout from "@/components/layout"
 import NavBar from "@/components/navbar/navBar"
-import formatDate from "@/components/utility/date-formatter"
+import Box from "@mui/material/Box"
+import Typography from "@mui/material/Typography"
+import Button from "@mui/material/Button"
 import { deleteBooking, listBookings } from "@/data/booking"
 import { Grid } from "@mui/material"
 import { useRouter } from "next/router"
@@ -26,6 +28,7 @@ export default function Bookings() {
 
   const getSetBookings = () => {
     listBookings().then((res)=>{
+      res.sort((a,b) => new Date(a.tickets[0].flight.departureDay) - new Date(b.tickets[0].flight.departureDay))
       setBookings(res)
     })
   }
@@ -46,17 +49,37 @@ export default function Bookings() {
             justifyContent: 'center'
          }} 
       >
-        {bookings ? bookings.map((booking)=> {
+        {bookings.length ? bookings.map((booking)=> {
           const destination = booking.tickets.length-1
           return (
               <BookingCard key={booking.id} booking={booking} handleDelete={handleDelete} destination={destination}/>
           )})
         :
-        ""
+        <>
+          <Box sx={{backgroundColor: 'rgb(203, 199, 199)', display: 'flex', justifyContent: 'center', width: '100%', padding: 4}}>
+            <Typography variant="h4">
+                You currently have no flights booked.
+            </Typography>
+            <Button 
+                    variant="contained"
+                    onClick={()=>{router.push("/")}}
+                    sx={{
+                        marginLeft: 6,
+                        boxShadow: 3, 
+                        backgroundColor: '#F3B12C',
+                        color: 'white',
+                        ":hover": {
+                            backgroundColor: '#A1A1A1',
+                            color: 'white'
+                        }
+                    }}
+            >
+                    Book Now!
+            </Button> 
+          </Box> 
+        </>
       }
-
       </Grid>
-    
     </>
   )
 }
