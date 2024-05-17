@@ -1,5 +1,5 @@
-import Layout from "@/components/Layout"
-import NavBar from "@/components/navbar/NavBar"
+import Layout from "@/components/layout"
+import NavBar from "@/components/navbar/navBar"
 import { getFlights } from "@/data/flights"
 import Card  from "@mui/material/Card"
 import  Box from "@mui/material/Box"
