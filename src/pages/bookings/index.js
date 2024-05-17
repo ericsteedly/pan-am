@@ -28,6 +28,7 @@ export default function Bookings() {
 
   const getSetBookings = () => {
     listBookings().then((res)=>{
+      res.sort((a,b) => new Date(a.tickets[0].flight.departureDay) - new Date(b.tickets[0].flight.departureDay))
       setBookings(res)
     })
   }
