@@ -49,11 +49,11 @@ export default function Login() {
           sm={4}
           md={7}
           sx={{
-            backgroundImage: 'url(https://airlineemployeeshop.com/cdn/shop/products/paa_001roundcoaster_480x480.png?v=1611169846)',
+            backgroundImage: 'url(https://static1.simpleflyingimages.com/wordpress/wp-content/uploads/2020/03/gettyimages-614170456-594x594-1.jpg)',
             backgroundRepeat: 'no-repeat',
             backgroundColor: (t) =>
               t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
-            backgroundSize: 600,
+            backgroundSize: 900,
             backgroundPosition: 'center',
           }}
         />
@@ -67,6 +67,9 @@ export default function Login() {
               alignItems: 'center',
             }}
           >
+            <Typography variant='h6' textAlign='center' sx={{mt: 15, mb: 5, ml: 1, mr: 1}}>
+              Welcome to Fan Am Airways, a mock flight booking application for fans and admirers of the famous Pan Am Airways.
+            </Typography>
             <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
               <LockOutlinedIcon />
             </Avatar>

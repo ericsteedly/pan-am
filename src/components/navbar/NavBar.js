@@ -7,22 +7,31 @@ export default function NavBar() {
     <Box sx={{ flexGrow: 1}}>
         <AppBar position="static" sx={{ minHeight: 160, justifyContent: 'flex-end'}}>
         <Toolbar disableGutters>
+            <Box sx={{
+                display: 'flex', 
+                flexDirection: 'column', 
+                alignItems: 'flex-start',  
+                flexGrow: 3
+            }}>
             <Typography
-                variant="h1"
+                variant="h2"
                 noWrap
                 sx={{
-                    ml: 5,
+                    ml: 2,
                     fontFamily: 'inherit',
                     fontWeight: 700,
                     letterSpacing: '.1rem',
                     color: 'ivory',
-                    flexGrow: 2
                 }}
             >
                 <Link href="/" underline="none" color="inherit">
-                    PAN-AM
+                    Fan Am Airways
                 </Link>
             </Typography>
+            <Typography variant="h10" fontStyle='italic' sx={{marginBottom: 1.5, ml: 2.5}}>
+                Pretending to book Pan Am flights since 2024
+            </Typography>
+            </Box>
             <MainMenu />
         </Toolbar>
         </AppBar>

@@ -63,11 +63,11 @@ export default function Login() {
           sm={4}
           md={7}
           sx={{
-            backgroundImage: 'url(https://www.nps.gov/articles/000/images/Pan-Am-Image-1-Transpacific-Poster.jpg?maxwidth=650&autorotate=false)',
+            backgroundImage: 'url(https://static1.simpleflyingimages.com/wordpress/wp-content/uploads/2020/03/gettyimages-614170456-594x594-1.jpg)',
             backgroundRepeat: 'no-repeat',
             backgroundColor: (t) =>
               t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
-            backgroundSize: 620,
+            backgroundSize: 900,
             backgroundPosition: 'center',
           }}
         />

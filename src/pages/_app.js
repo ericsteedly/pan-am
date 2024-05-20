@@ -2,6 +2,7 @@ import AuthWrapper from '@/components/auth';
 import CssBaseline from '@mui/material/CssBaseline';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import '../app/globals.css'
 
 
 export default function PanAm({ Component, pageProps}) {
