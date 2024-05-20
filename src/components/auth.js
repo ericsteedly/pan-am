@@ -7,11 +7,11 @@ export default function AuthWrapper({ children }) {
   useEffect(() => {
     const isAuthenticated = localStorage.getItem('token');
 
-    if (!isAuthenticated && router.pathname !== '/login' && router.pathname !== '/register') {
+    if (!isAuthenticated && router.pathname !== '/login' && router.pathname !== '/register' && router.pathname !== '/disclaimer') {
       router.push('/login');
     }
 
-    if (isAuthenticated && (router.pathname === '/login' || router.pathname === '/register')) {
+    if (isAuthenticated && (router.pathname === '/login' || router.pathname === '/register' || router.pathname === '/disclaimer')) {
       router.push('/');
     }
   }, [router.pathname]);

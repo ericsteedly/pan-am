@@ -67,8 +67,11 @@ export default function Login() {
               alignItems: 'center',
             }}
           >
-            <Typography variant='h6' textAlign='center' sx={{mt: 15, mb: 5, ml: 1, mr: 1}}>
-              Welcome to Fan Am Airways, a mock flight booking application for fans and admirers of the famous Pan Am Airways.
+            <Typography variant='h6' textAlign='center' sx={{mt: 12, mb: 4, ml: 1, mr: 1}}>
+              Welcome to <b>Fan Am Airways</b>, a mock flight booking application for fans and admirers of the famous Pan Am Airways.
+            </Typography>
+            <Typography sx={{fontWeight: 800, mb: 5}}>
+              Please read this <Link href='/disclaimer'>DISCLAIMER</Link>
             </Typography>
             <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
               <LockOutlinedIcon />
