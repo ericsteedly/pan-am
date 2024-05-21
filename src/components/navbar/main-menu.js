@@ -23,8 +23,9 @@ export default function MainMenu() {
                 aria-controls={open ? 'main-menu' : undefined}
                 aria-expanded={open ? 'true' : undefined}
                 onClick={handleClick}
+                sx={{mt: 6, mr: 2}}
             >
-                <MenuSharpIcon sx={{ fontSize: 40, color: 'white', mt: 6, mr: 2}} />
+                <MenuSharpIcon sx={{ fontSize: 40, color: 'white'}} />
             </IconButton>
             <Menu
                 id="main-menu"
