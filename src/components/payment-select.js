@@ -1,8 +1,8 @@
-import { Autocomplete, TextField, Box } from "@mui/material"
+import { Autocomplete, TextField, Box, Typography } from "@mui/material"
 
 export default function PaymentSelect({ paymentList, setPayment }) {
   return (
-    <>
+    <Box>
         <Autocomplete 
             id="payment-select"
             sx={{ width: 300, marginRight: 2 }}
@@ -31,6 +31,9 @@ export default function PaymentSelect({ paymentList, setPayment }) {
                 />
             )}
         />
-    </>
+        <Typography sx={{color: 'red', mt: 1}}>
+        *Do not use real payment info!
+        </Typography>
+    </Box>
   )
 }

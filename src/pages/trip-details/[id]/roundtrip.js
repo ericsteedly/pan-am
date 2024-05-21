@@ -264,6 +264,7 @@ export default function RoundTrip() {
                       <Button
                         onClick={handleOpenModal}
                         sx={{
+                          marginBottom: 4,
                           boxShadow: 3, 
                           backgroundColor: '#3182E5',
                           marginRight: 1,
@@ -283,6 +284,7 @@ export default function RoundTrip() {
                         onClick={handleBook}
                         variant="contained"
                         sx={{
+                          marginBottom: 4,
                           boxShadow: 3, 
                           backgroundColor: '#F3B12C',
                           color: 'black',
@@ -298,6 +300,7 @@ export default function RoundTrip() {
                           onClick={handleCancel} 
                           variant="contained"
                           sx={{
+                            marginBottom: 4,
                             marginLeft:2,
                             boxShadow: 3, 
                             backgroundColor: '#F3B12C',

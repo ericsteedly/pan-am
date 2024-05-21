@@ -183,6 +183,7 @@ export default function TripDetails() {
                     <Button
                       onClick={handleOpenModal}
                       sx={{
+                        marginBottom: 4,
                         boxShadow: 3, 
                         backgroundColor: '#3182E5',
                         marginRight: 1,
@@ -202,6 +203,7 @@ export default function TripDetails() {
                       onClick={handleBook}
                       variant="contained"
                       sx={{
+                        marginBottom: 4,
                         boxShadow: 3, 
                         backgroundColor: '#F3B12C',
                         color: 'black',
@@ -217,6 +219,7 @@ export default function TripDetails() {
                         onClick={handleCancel} 
                         variant="contained"
                         sx={{
+                          marginBottom: 4,
                           marginLeft:2,
                           boxShadow: 3, 
                           backgroundColor: '#F3B12C',
