@@ -89,7 +89,7 @@ export default function SelectFlightList() {
                     return_id: res.id
                 }
                     createRoundTrip(roundtripObj).then((res)=>{
-                        router.push(`trip-details/${res.id}/roundtrip?departId=${res.departure_booking}&returnId=${res.return_booking}`)
+                        router.push(`trip-details/${res.id}/roundtrip?departId=${res.departure_booking.id}&returnId=${res.return_booking.id}`)
                 })
                 } else {
                     router.push(`trip-details/${res.id}`)
