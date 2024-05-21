@@ -13,6 +13,7 @@ import { login, register } from '@/data/auth';
 import { useAppContext } from '@/context/state';
 import { useRouter } from 'next/router';
 import Layout from '@/components/layout';
+import { DoneSharp } from '@mui/icons-material';
 
 
 
@@ -48,6 +49,8 @@ export default function Login() {
                 if (res.token) {
                     setToken(res.token)
                     router.push('/')
+                } else {
+                    window.alert("Username not available, please try another")
                 }
             })
         }
@@ -172,13 +175,6 @@ export default function Login() {
                 >
                     Create account
                 </Button>
-                <Grid container>
-                    <Grid item>
-                    <Link href="register" variant="body2">
-                        {"Don't have an account? Sign Up"}
-                    </Link>
-                    </Grid>
-                </Grid>
             </Box>
           </Box>
         </Grid>
