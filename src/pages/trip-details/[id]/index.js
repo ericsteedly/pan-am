@@ -136,7 +136,7 @@ export default function TripDetails() {
                         Price per passenger
                       </Typography>
                       <Typography>
-                        ${booking.total_price}
+                        ${booking.total_price?.toFixed(2)}
                       </Typography>
                     </Box>
                     <Box className={`${classes.price}`}>
@@ -144,7 +144,7 @@ export default function TripDetails() {
                         Taxes and Fees per passenger
                       </Typography>
                       <Typography>
-                        ${fees + (booking.total_price * taxes)}
+                        ${(fees + (booking.total_price * taxes)).toFixed(2)}
                       </Typography>
                     </Box>
                     <Grid item lg={12}>
@@ -155,7 +155,7 @@ export default function TripDetails() {
                         Total per passenger
                       </Typography>
                       <Typography>
-                        ${booking.total_price + fees + (booking.total_price * taxes)}
+                        ${(booking.total_price + fees + (booking.total_price * taxes)).toFixed(2)}
                       </Typography>
                     </Box>
                     <Box className={`${classes.price}`}>
@@ -174,7 +174,7 @@ export default function TripDetails() {
                         Flight Total
                       </Typography>
                       <Typography>
-                      ${booking.total_price + fees + (booking.total_price * taxes)}
+                      ${(booking.total_price + fees + (booking.total_price * taxes)).toFixed(2)}
                       </Typography>
                     </Box>
                   </Card>
