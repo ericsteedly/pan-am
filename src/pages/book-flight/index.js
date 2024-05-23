@@ -117,6 +117,9 @@ export default function BookFlight() {
                       departRefEl={refEls.departDate}
                       returnRefEl={refEls.returnDate} 
                     />
+                    <Typography sx={{mt: 1, color: 'red'}}>
+                      * No flights exist beyond July 31, 2024
+                    </Typography>
                   </Box>
                   <Box className={`${classes.column3}`}>
                     <Button 
