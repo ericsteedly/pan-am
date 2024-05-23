@@ -209,7 +209,7 @@ export default function RoundTrip() {
                           <b>Departure</b> Price per passenger
                         </Typography>
                         <Typography>
-                          ${departBooking.total_price}
+                          ${departBooking.total_price?.toFixed(2)}
                         </Typography>
                       </Box>
                       <Box className={`${classes.price}`}>
@@ -217,7 +217,7 @@ export default function RoundTrip() {
                           <b>Return</b> Price per passenger
                         </Typography>
                         <Typography>
-                          ${returnBooking.total_price}
+                          ${returnBooking.total_price?.toFixed(2)}
                         </Typography>
                       </Box>
                       <Box className={`${classes.price}`}>
@@ -225,7 +225,7 @@ export default function RoundTrip() {
                           Taxes and Fees per passenger
                         </Typography>
                         <Typography>
-                          ${fees + (totalPrice * taxes)}
+                          ${(fees + (totalPrice * taxes)).toFixed(2)}
                         </Typography>
                       </Box>
                       <Grid item lg={12}>
@@ -236,7 +236,7 @@ export default function RoundTrip() {
                           Total per passenger
                         </Typography>
                         <Typography>
-                          ${totalPrice+ fees + (totalPrice * taxes)}
+                          ${(totalPrice + fees + (totalPrice * taxes)).toFixed(2)}
                         </Typography>
                       </Box>
                       <Box className={`${classes.price}`}>
@@ -255,7 +255,7 @@ export default function RoundTrip() {
                           Trip Total
                         </Typography>
                         <Typography>
-                        ${totalPrice+ fees + (totalPrice * taxes)}
+                        ${(totalPrice+ fees + (totalPrice * taxes)).toFixed(2)}
                         </Typography>
                       </Box>
                     </Card>
