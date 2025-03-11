@@ -59,7 +59,6 @@ export default function RoundTrip() {
   };
 
   useEffect(() => {
-    debugger;
     if (router.isReady) {
       if (departId) {
         retrieveBooking(departId).then((res) => {
