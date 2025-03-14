@@ -46,7 +46,7 @@ export default function Bookings() {
 
   useEffect(() => {
     getSetBookings();
-  }, []);
+  }, [router.asPath]);
 
   return (
     <>
