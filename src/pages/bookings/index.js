@@ -9,9 +9,52 @@ import { Grid } from "@mui/material";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
-export default function Bookings() {
+export async function getServerSideProps(context) {
+  try {
+    const token = context.req.cookies.auth_token;
+
+    const response = await fetch(
+      "https://hammerhead-app-qgvud.ondigitalocean.app/bookings",
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Token ${token}`,
+        },
+      }
+    );
+    if (!response.ok) {
+      throw new Error("Failed to fetch bookings");
+    }
+
+    const bookings = await response.json();
+
+    if (bookings && bookings.length > 0) {
+      bookings.sort(
+        (a, b) =>
+          new Date(a.tickets[0].flight.departureDay) -
+          new Date(b.tickets[0].flight.departureDay)
+      );
+    }
+
+    return {
+      props: {
+        initialBookings: bookings || [],
+      },
+    };
+  } catch (error) {
+    console.log("Error fetching bookings", error);
+    return {
+      props: {
+        initialBookings: [],
+      },
+    };
+  }
+}
+
+export default function Bookings({ initialBookings }) {
   const router = useRouter();
-  const [bookings, setBookings] = useState([]);
+  const [bookings, setBookings] = useState(initialBookings);
 
   const handleDelete = async (id) => {
     const cancel = window.confirm(
@@ -58,9 +101,11 @@ export default function Bookings() {
           justifyContent: "center",
         }}
       >
-        {bookings.length ? (
+        {bookings && bookings.length > 0 ? (
           bookings.map((booking) => {
-            const destination = booking.tickets.length - 1;
+            const destination = booking?.tickets?.length
+              ? booking.tickets.length - 1
+              : 0;
             return (
               <BookingCard
                 key={booking.id}
