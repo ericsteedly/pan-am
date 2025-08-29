@@ -31,7 +31,7 @@ export function getUserAccount() {
 
 export async function editUserAccount(userId, userObj) {
     // Retrieve the CSRF token from the Django server
-    await fetch('http://13.222.221.47/csrf', {
+    await fetch('https://hammerhead-app-qgvud.ondigitalocean.app/csrf', {
       credentials: 'include', // Include cookies in the request
     })
       .then(response => response.json())
@@ -39,7 +39,7 @@ export async function editUserAccount(userId, userObj) {
         const csrfToken = data.csrfToken;
 
         // Make the request to update the User object
-        await fetch(`http://13.222.221.47/account/${userId}`, {
+        await fetch(`https://hammerhead-app-qgvud.ondigitalocean.app/account/${userId}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
