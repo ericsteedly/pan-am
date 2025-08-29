@@ -1,4 +1,4 @@
-const API_URL = "http://13.222.221.47";
+const API_URL = "https://hammerhead-app-qgvud.ondigitalocean.app"; 
 
 const checkError = (res) => {
   if (!res.ok) {
