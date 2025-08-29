@@ -1,4 +1,4 @@
-const API_URL = "https://hammerhead-app-qgvud.ondigitalocean.app";
+const API_URL = "https://hammerhead-app-qgvud.ondigitalocean.app"; 
 
 const checkError = (res) => {
   if (!res.ok) {

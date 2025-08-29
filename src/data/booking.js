@@ -1,4 +1,4 @@
-import { fetchWithResponse, fetchWithoutResponse } from "./fetcher";
+import { fetchWithResponse, fetchWithoutResponse } from "./fetcher"; 
 
 export const createBooking = (flights) => {
     return fetchWithResponse("bookings", {
