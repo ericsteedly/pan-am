@@ -56,7 +56,7 @@ export const listBookings = () => {
 
 
 export const retrieveBooking = async (bookingId) => {
-    return await fetch(`https://hammerhead-app-qgvud.ondigitalocean.app/bookings/${bookingId}`,
+    return await fetch(`https://panamapi.dev/bookings/${bookingId}`,
         {
             method: "GET",
             headers: {
@@ -68,7 +68,7 @@ export const retrieveBooking = async (bookingId) => {
 }
 
 export const retrieveRoundTrip = async (roundTripId) => {
-    return await fetch(`https://hammerhead-app-qgvud.ondigitalocean.app/bookings/${roundTripId}/retrieveRoundtrip`,
+    return await fetch(`https://panamapi.dev/bookings/${roundTripId}/retrieveRoundtrip`,
         {
             method: "GET",
             headers: {
