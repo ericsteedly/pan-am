@@ -33,6 +33,8 @@ export default function Login() {
         setToken(res.token);
         document.cookie = `auth_token=${res.token}; path=/; max-age=86400`;
         router.push("/");
+      } else {
+        window.alert("Username or password incorrect")
       }
     });
   };
