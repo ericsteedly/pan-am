@@ -34,12 +34,12 @@ export default function Register() {
       window.alert("Incorrect Date format, please use 'YYYY-MM-DD'");
     } else {
       let user = {
-        username: data.get("username"),
-        password: data.get("password"),
+        username: data.get("username").trim(),
+        password: data.get("password").trim(),
         first_name: data.get("first_name"),
         last_name: data.get("last_name"),
         email: data.get("email"),
-        phone_number: data.get("phone_number"),
+        phone_number: data.get("phone_number").trim(),
         date_of_birth: data.get("date_of_birth"),
       };
       // log in after successful registration
