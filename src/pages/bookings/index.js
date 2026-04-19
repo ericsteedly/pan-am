@@ -13,16 +13,13 @@ export async function getServerSideProps(context) {
   try {
     const token = context.req.cookies.auth_token;
 
-    const response = await fetch(
-      "https://hammerhead-app-qgvud.ondigitalocean.app/bookings",
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Token ${token}`,
-        },
-      }
-    );
+    const response = await fetch("https://panamapi.dev/bookings", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${token}`,
+      },
+    });
     if (!response.ok) {
       throw new Error("Failed to fetch bookings");
     }
@@ -33,7 +30,7 @@ export async function getServerSideProps(context) {
       bookings.sort(
         (a, b) =>
           new Date(a.tickets[0].flight.departureDay) -
-          new Date(b.tickets[0].flight.departureDay)
+          new Date(b.tickets[0].flight.departureDay),
       );
     }
 
@@ -58,14 +55,14 @@ export default function Bookings({ initialBookings }) {
 
   const handleDelete = async (id) => {
     const cancel = window.confirm(
-      "Are you sure you would like to delete this flight?"
+      "Are you sure you would like to delete this flight?",
     );
     if (cancel) {
       const bookingObj = {
         booking_id: id,
       };
       try {
-        deleteBooking(bookingObj);
+        deleteBooking(bookingObj.booking_id);
         await getSetBookings();
       } catch (error) {
         console.error("Error deleting booking:", error);
@@ -79,7 +76,7 @@ export default function Bookings({ initialBookings }) {
       res.sort(
         (a, b) =>
           new Date(a.tickets[0].flight.departureDay) -
-          new Date(b.tickets[0].flight.departureDay)
+          new Date(b.tickets[0].flight.departureDay),
       );
       setBookings(res);
     } catch (error) {
